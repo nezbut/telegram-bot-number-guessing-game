@@ -1,6 +1,6 @@
 ## Hello everyone, this is my first telegram bot using aiogram
 ___
-#### to make everything work, you need to do 5 things
+#### To make everything work, you need to do 5 things
 1. Create and get a telegram bot token from @BotFather.
 2. Create a ".env" file in the project and enter your telegram bot token obtained from @BotFather as indicated in ".env.example".
 3. Create a "db.db" file in the "database" folder. You will thus create a sqlite database.
