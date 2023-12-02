@@ -1,5 +1,5 @@
+from config.config_data import Config
 import aiosqlite
-import config
 import logging
 
 
@@ -16,7 +16,7 @@ class AddDataBase:
             wins (int, optional): The number of wins. Defaults to 0.
         """
         try:
-            async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+            async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
                 db.row_factory = aiosqlite.Row
                 await db.execute('INSERT INTO users_stat (user, count_games, wins) VALUES (?, ?, ?)',
                                  (user.lower().strip(), str(count_games), str(wins)))
@@ -40,7 +40,7 @@ class AddDataBase:
         """
 
         try:
-            async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+            async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
                 db.row_factory = aiosqlite.Row
 
                 await db.execute('INSERT INTO users (username, chat_id) VALUES (?, ?)',
