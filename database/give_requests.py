@@ -1,6 +1,5 @@
 import aiosqlite
-import config
-
+from config.config_data import Config
 
 class GiveDataBase:
 
@@ -15,7 +14,7 @@ class GiveDataBase:
         Returns:
             dict: A dictionary containing the game statistics for the user, including the count of games played and the number of wins.
         """
-        async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+        async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
             db.row_factory = aiosqlite.Row
 
             async with db.execute('SELECT * FROM users_stat') as cursor:
@@ -40,7 +39,7 @@ class GiveDataBase:
                   Returns None if the user is not found in the database.
         """
 
-        async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+        async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
             db.row_factory = aiosqlite.Row
 
             async with db.execute('SELECT * FROM users') as cursor:
