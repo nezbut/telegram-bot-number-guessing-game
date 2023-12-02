@@ -1,5 +1,5 @@
+from config.config_data import Config
 import aiosqlite
-import config
 import logging
 
 
@@ -21,7 +21,7 @@ class UpdateDataBase:
 
         try:
 
-            async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+            async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
 
                 db.row_factory = aiosqlite.Row
                 await db.execute("UPDATE users_stat SET count_games = ?, wins = ? WHERE user = ?",
@@ -52,7 +52,7 @@ class UpdateDataBase:
 
         try:
 
-            async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+            async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
 
                 db.row_factory = aiosqlite.Row
                 await db.execute("UPDATE users SET in_game = ?, attempt = ?, num = ? WHERE username = ?",
@@ -81,7 +81,7 @@ class UpdateDataBase:
 
         try:
 
-            async with aiosqlite.connect(config.DATA_BASE_DIR) as db:
+            async with aiosqlite.connect(Config.bot_db.data_base_path) as db:
 
                 db.row_factory = aiosqlite.Row
                 await db.execute("UPDATE users SET attempt = ? WHERE username = ?",
