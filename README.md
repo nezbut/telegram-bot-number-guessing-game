@@ -4,7 +4,7 @@ ___
 1. Create and get a telegram bot token from @BotFather.
 2. Create a ".env" file in the project and enter your telegram bot token obtained from @BotFather as indicated in ".env.example".
 3. Create a "db.db" file in the "database" folder. You will thus create a sqlite database.
-4. In this database, create 2 tables with the queries specified below (These queries can be executed in any sqlite database management program, these are the ones I know: https://sqlitebrowser.org/ and https://sqlitestudio.pl/).
+4. In this database, create 2 tables with the following queries (these queries can be executed in the sqlite database management program: https://sqlitestudio.pl/).
 5. Run the main.py file
 #### Everything is ready!
 
@@ -20,7 +20,7 @@ CREATE TABLE users (
     attempt  INTEGER NOT NULL
                      DEFAULT (0),
     num      INTEGER NOT NULL
-                     DEFAULT (0) 
+                     DEFAULT (0)
 );
 ```
 
