@@ -24,3 +24,11 @@ LEXICON_RU: dict[str, str | Callable | tuple[str]] = {
     'stop_cmd': ("/stop", "Остановить игру"),
     'reset_cmd': ("/reset", "Обнулить мою статистику")
 }
+
+LEXICON_COMMANDS_MENU: dict[str, str] = {
+    '/help': "Помощь по боту",
+    '/stat': "Ваша статистика",
+    '/go': "Начать игру",
+    '/stop': "Остановить игру",
+    '/reset': "Обнулить статистику"
+}
