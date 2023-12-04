@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher
 from handlears import commands_handlears, other_handlears
 from config.config_data import Config
+from utils.menu_button import set_command_menu
 import asyncio
 import logging
 
@@ -16,6 +17,9 @@ async def main():
         commands_handlears.router,
         other_handlears.router
     )
+    
+    if Config.command_menu:
+        await set_command_menu(bot=bot)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
