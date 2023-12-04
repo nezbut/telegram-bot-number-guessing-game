@@ -32,3 +32,17 @@ LEXICON_COMMANDS_MENU: dict[str, str] = {
     '/stop': "Остановить игру",
     '/reset': "Обнулить статистику"
 }
+
+LEXICON_KEYBOARD: dict[str, str] = {
+    '/go': "Начать игру",
+    '/stop': "Остановить игру",
+    '/stat': "Моя статистика",
+    '/reset': "Обнулить мою статистику",
+    '/help': "Помощь"
+}
+
+__all__ = (
+    'LEXICON_RU',
+    'LEXICON_COMMANDS_MENU',
+    'LEXICON_KEYBOARD'
+)
