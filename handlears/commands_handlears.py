@@ -4,6 +4,7 @@ from aiogram.filters import CommandStart, Command
 
 from database.main_class_db import BotDB
 from lexicon.lexicon_ru import LEXICON_RU
+from keyboards.commands_keyboard import get_keyboard_bot
 import asyncio
 
 router = Router()
@@ -21,11 +22,11 @@ async def start_command(message: Message):
     """
     user = await BotDB.GIVE.give_user(message.from_user.username)
     if user:
-        await message.answer(LEXICON_RU['start_old_user'](message.from_user.full_name))
+        await message.answer(LEXICON_RU['start_old_user'](message.from_user.full_name), reply_markup=get_keyboard_bot())
 
     else:
 
-        await message.answer(LEXICON_RU['start_new_user'](message.from_user.full_name))
+        await message.answer(LEXICON_RU['start_new_user'](message.from_user.full_name), reply_markup=get_keyboard_bot())
 
         await asyncio.gather(
             BotDB.ADD.add_user(
@@ -50,7 +51,7 @@ async def help_command(message: Message):
         None
     """
 
-    await message.answer(LEXICON_RU['help'])
+    await message.answer(LEXICON_RU['help'], reply_markup=get_keyboard_bot())
 
 
 @router.message(F.text.in_(LEXICON_RU['stat_cmd']))
@@ -69,7 +70,7 @@ async def stat_command(message: Message):
     await message.answer(LEXICON_RU['stat'](
         stat['count_games'],
         stat['wins']
-    ))
+    ), reply_markup=get_keyboard_bot())
 
 
 @router.message(F.text.in_(LEXICON_RU['reset_cmd']))
@@ -91,10 +92,10 @@ async def reset_stat_command(message: Message):
     )
 
     if result:
-        await message.answer(LEXICON_RU['reset_stat_good'])
+        await message.answer(LEXICON_RU['reset_stat_good'], reply_markup=get_keyboard_bot())
 
     else:
-        await message.answer(LEXICON_RU['reset_stat_bad'])
+        await message.answer(LEXICON_RU['reset_stat_bad'], reply_markup=get_keyboard_bot())
 
 
 @router.message(F.text.in_(LEXICON_RU['stop_cmd']))
@@ -118,13 +119,13 @@ async def stop_game_command(message: Message):
         result = await BotDB.stop_game(message.from_user.username)
 
         if result:
-            await message.answer(LEXICON_RU['stop_game_good'])
+            await message.answer(LEXICON_RU['stop_game_good'], reply_markup=get_keyboard_bot())
 
         else:
-            await message.answer(LEXICON_RU['stop_game_bad'])
+            await message.answer(LEXICON_RU['stop_game_bad'], reply_markup=get_keyboard_bot())
 
     else:
-        await message.answer(LEXICON_RU['stop_game_user_not_in_game'])
+        await message.answer(LEXICON_RU['stop_game_user_not_in_game'], reply_markup=get_keyboard_bot())
 
 
 @router.message(F.text.in_(LEXICON_RU['go_cmd']))
@@ -145,13 +146,13 @@ async def start_game_command(message: Message):
         result = await BotDB.start_game(message.from_user.username)
 
         if result:
-            await message.answer(LEXICON_RU['go_game_good'])
+            await message.answer(LEXICON_RU['go_game_good'], reply_markup=get_keyboard_bot())
 
         else:
-            await message.answer(LEXICON_RU['go_game_bad'])
+            await message.answer(LEXICON_RU['go_game_bad'], reply_markup=get_keyboard_bot())
 
     else:
-        await message.answer(LEXICON_RU['go_game_user_in_game'])
+        await message.answer(LEXICON_RU['go_game_user_in_game'], reply_markup=get_keyboard_bot())
 
 
 @router.message(F.text & (F.text.isdigit()) & (F.text.in_(tuple(map(lambda a: str(a), range(1, 101))))))
@@ -178,19 +179,19 @@ async def answer_user_game(message: Message):
 
         if attempt <= 0:
             await BotDB.stop_game(message.from_user.username)
-            await message.answer(LEXICON_RU['user_lose'])
+            await message.answer(LEXICON_RU['user_lose'], reply_markup=get_keyboard_bot())
             return
 
         if user_num == win_rand_num:
             await BotDB.stop_game(message.from_user.username, win=True)
-            await message.answer(LEXICON_RU['user_win'](attempt))
+            await message.answer(LEXICON_RU['user_win'](attempt), reply_markup=get_keyboard_bot())
             return
 
         elif win_rand_num > user_num:
-            await message.answer(LEXICON_RU['number_is_greater'](user_num))
+            await message.answer(LEXICON_RU['number_is_greater'](user_num), reply_markup=get_keyboard_bot())
 
         elif win_rand_num < user_num:
-            await message.answer(LEXICON_RU['number_is_less'](user_num))
+            await message.answer(LEXICON_RU['number_is_less'](user_num), reply_markup=get_keyboard_bot())
 
         await BotDB.UPDATE.update_user_attempt(
             user=message.from_user.username,
