@@ -17,7 +17,7 @@ async def main():
         commands_handlears.router,
         other_handlears.router
     )
-    
+
     if Config.command_menu:
         await set_command_menu(bot=bot)
 
@@ -26,5 +26,7 @@ async def main():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    if Config.logs:
+        logging.basicConfig(level=logging.INFO)
+        
     asyncio.run(main())
