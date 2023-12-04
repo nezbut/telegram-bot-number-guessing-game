@@ -38,7 +38,7 @@ async def start_command(message: Message):
         )
 
 
-@router.message(Command(commands=["help"]))
+@router.message(F.text.in_(LEXICON_RU['help_cmd']))
 async def help_command(message: Message):
     """
     A decorator that registers the function as a message handler for the "/help" command.
@@ -53,7 +53,7 @@ async def help_command(message: Message):
     await message.answer(LEXICON_RU['help'])
 
 
-@router.message(Command(commands=["stat"]))
+@router.message(F.text.in_(LEXICON_RU['stat_cmd']))
 async def stat_command(message: Message):
     """
     Handles the 'stat' command.
@@ -72,7 +72,7 @@ async def stat_command(message: Message):
     ))
 
 
-@router.message(Command(commands=["reset"]))
+@router.message(F.text.in_(LEXICON_RU['reset_cmd']))
 async def reset_stat_command(message: Message):
     """
     Resets the user's statistics by updating the count of wins and count of games to zero.
@@ -97,7 +97,7 @@ async def reset_stat_command(message: Message):
         await message.answer(LEXICON_RU['reset_stat_bad'])
 
 
-@router.message(Command(commands=["stop"]))
+@router.message(F.text.in_(LEXICON_RU['stop_cmd']))
 async def stop_game_command(message: Message):
     """
     Handles the 'stop' command.
@@ -127,7 +127,7 @@ async def stop_game_command(message: Message):
         await message.answer(LEXICON_RU['stop_game_user_not_in_game'])
 
 
-@router.message(Command(commands=["go"]))
+@router.message(F.text.in_(LEXICON_RU['go_cmd']))
 async def start_game_command(message: Message):
     """
     Handles the "go" command and starts the game for the user.
